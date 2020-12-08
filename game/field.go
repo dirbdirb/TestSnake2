@@ -43,6 +43,7 @@ func InitField() Field {
 	}
 
 	f.PlaceFood()
+	f.PlacePowerUp()
 
 	return f
 }
