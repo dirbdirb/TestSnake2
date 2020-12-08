@@ -59,6 +59,8 @@ func (f *Field) Display() {
 	// Displaying food on the field
 	DrawFood(f.food)
 
+	DrawPowerUp(f.powerup)
+
 	// Display the score
 	DrawScore(f.points)
 
@@ -289,6 +291,14 @@ func (f *Field) PlaceObstacle() {
 
 // Function to display the food on the field
 func DrawFood(f Food) {
+	clr := termbox.ColorDefault
+	termbox.SetCell(f.coord.x, f.coord.y, f.char, clr, clr)
+
+	// termbox.Close()
+	// fmt.Println("Rune Width:  ", rune.RuneWidth(f.char))
+	// fmt.Println("food x:  ", f.coord.x)
+}
+func DrawPowerUp(f PowerUp) {
 	clr := termbox.ColorDefault
 	termbox.SetCell(f.coord.x, f.coord.y, f.char, clr, clr)
 
