@@ -245,26 +245,26 @@ func (f *Field) PlaceFood() {
 
 	f.food = DropFoodAt(randCoord)
 }
+
 func (f *Field) PlacePowerUp() {
-	// Declare x and y coord for the rand food drop
-	var randCoord Coordinate
+	var randomCoord Coordinate
 
 	for {
 		x := rand.Intn(fieldWidth-2) + 1
 		y := rand.Intn(fieldHeight-2) + 1
 
-		randCoord = Coordinate{x: x, y: y}
-		if f.snake.AvailablePosition(randCoord) {
-			if f.points >= 500 {
-				if f.NotInObsPosition(randCoord) {
+		randomCoord = Coordinate{x: x, y: y}
+
+		if f.snake.AvailablePosition(randomCoord) {
+			if randomCoord != f.food.coord {
+				if f.NotInObsPosition(randomCoord) {
 					break
 				}
-			} else {
-				break
 			}
 		}
 	}
-	f.powerup = DropPowerUpAt(randCoord)
+
+	f.powerup = DropPowerUpAt(randomCoord)
 }
 
 // Find an available space to put the obstacle
@@ -296,6 +296,7 @@ func DrawFood(f Food) {
 	// fmt.Println("Rune Width:  ", rune.RuneWidth(f.char))
 	// fmt.Println("food x:  ", f.coord.x)
 }
+
 func DrawPowerUp(f PowerUp) {
 	clr := termbox.ColorDefault
 	termbox.SetCell(f.coord.x, f.coord.y, f.char, clr, clr)
