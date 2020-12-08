@@ -43,7 +43,6 @@ func InitField() Field {
 	}
 
 	f.PlaceFood()
-	f.PlacePowerUp()
 
 	return f
 }
@@ -59,8 +58,6 @@ func (f *Field) Display() {
 	// Displaying food on the field
 	DrawFood(f.food)
 
-	DrawPowerUp(f.powerup)
-
 	// Display the score
 	DrawScore(f.points)
 
@@ -74,6 +71,7 @@ func (f *Field) Display() {
 	if f.points >= 500 {
 		f.BonusRounds()
 	}
+	DrawPowerUp(f.powerup)
 
 	// Now display it
 	termbox.Flush()
@@ -355,6 +353,7 @@ func (f *Field) BonusRounds() {
 		for i := 0; i < numObs; i++ {
 			// Drop the obstacle
 			f.PlaceObstacle()
+			f.PlacePowerUp()
 			f.obsList = append(f.obsList, f.obstacle.coord)
 		}
 
